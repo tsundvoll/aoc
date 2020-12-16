@@ -1,3 +1,5 @@
+import time
+
 data = [x for x in open('input.txt').read().splitlines()]
 
 
@@ -10,5 +12,14 @@ def solution_part_2():
 
 
 if __name__ == "__main__":
-    print("Answer Part 1:", solution_part_1())
-    print("Answer Part 2:", solution_part_2())
+    print("Part 1")
+    tic = time.perf_counter()
+    print("- answer:", solution_part_1())
+    toc = time.perf_counter()
+    print(f"- runtime: {toc - tic:0.4f} seconds")
+
+    print("Part 2")
+    tic = time.perf_counter()
+    print("- answer:", solution_part_2())
+    toc = time.perf_counter()
+    print(f"- runtime: {toc - tic:0.4f} seconds")
