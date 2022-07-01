@@ -7,19 +7,9 @@ import pyperclip
 from tqdm import tqdm
 from utility import parse
 
-prog = None
 
-def run_alu(model_number):
-    global prog
-
-    variables = {
-        'w': 0,
-        'x': 0,
-        'y': 0,
-        'z': 0,
-    }
-
-    for i, word in enumerate(prog):
+def run_alu(prog, input_var, variables):
+    for word in prog:
         instr, *param = word.split(' ')
 
         if len(param) > 1 and (param[1].isdigit() or param[1][0] == '-'):
@@ -28,7 +18,7 @@ def run_alu(model_number):
             b = variables[param[1]]
 
         if instr == 'inp':
-            variables[param[0]] = next(model_number)
+            variables[param[0]] = input_var
         elif instr == 'add':
             variables[param[0]] += b
         elif instr == 'mul':
@@ -42,72 +32,45 @@ def run_alu(model_number):
 
     return variables
 
-# def parse_alu(prog_list):
-#     model_number = None
-#     w = 0
-#     x = 0
-#     y = 0
-#     z = 0
-
-#     prog = []
-
-#     for i, word in enumerate(prog_list):
-#         instr, *param = word.split(' ')
-
-#         if len(param) > 1 and (param[1].isdigit() or param[1][0] == '-'):
-#             b = int(param[1])
-#         elif len(param) > 1:
-#             b = variables[param[1]]
-
-#         if instr == 'inp':
-#             variables[param[0]] = next(model_number)
-#         elif instr == 'add':
-#             variables[param[0]] += b
-#         elif instr == 'mul':
-#             variables[param[0]] *= b
-#         elif instr == 'div':
-#             variables[param[0]] = int(variables[param[0]] / b)
-#         elif instr == 'mod':
-#             variables[param[0]] = variables[param[0]] % b
-#         elif instr == 'eql':
-#             variables[param[0]] = variables[param[0]] == b
-
-#     return variables
-
 
 def first_task(input):
-    global prog
-    prog = input
-
-    # model_number = map(int, '13579246899999')
-
-
-    model_number_current = 99999999999999
-
-    decr = list(range(10))
-    decr[9] = 10
-
-
-    count = 0
-    # while model_number_current > 10000000000000:
-    for _ in tqdm(range(99999999999999 - 10000000000000)):
-        # model_number = map(int, str(model_number_current))
-        model_number = map(int, '13579246899999')
-
-        variables = run_alu(model_number)
-        print()
-        print(model_number_current)
-        print(variables)
-        if variables['z'] == 0:
-            return model_number_current
-
-        if str(model_number_current)[-1] == '1':
-            model_number_current -= 2
-        else:
-            model_number_current -= 1
-
-        break
+    chunks = []
+    chunk = []
+    is_first = True
+    for line in input:
+        op, *param = line.split(' ')
+        if op == 'inp':
+            if not is_first:
+                chunks.append(chunk)
+            chunk = []
         
+        is_first = False
+        chunk.append(line)
+    chunks.append(chunk)
+
+    variables_start = {
+        'w': 0,
+        'x': 0,
+        'y': 0,
+        'z': 0,
+    }
+
+    variables = variables_start.copy()
+
+    possibilities = []
+
+    variables = variables_start.copy()
+    for chunk in chunks[::-1]:
+        for w in range(1,10):
+            for z in tqdm(range(100000000)):
+                variables = variables_start.copy()
+                variables['z'] = z
+                run_alu(chunk, w, variables)
+                if variables['z'] == 0:
+                    print(variables['z'])
+                    print(variables)
+                    break
+        break
 
 
 def second_task(input):

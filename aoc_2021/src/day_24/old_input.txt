@@ -254,8 +254,7 @@ add z y
 
 w = 9
 
-x = z
-x = x % 26
+x = z % 26
 z = z / 26
 
 x = x != w - 8
@@ -263,10 +262,56 @@ x = x != w - 8
 y = 25
 y *= x (+/- y)
 y += 1
-z *= y
+z *= y          # Multiply by -24 or 26
 
 y = w + 4
 
 y *= x
 
 z += y
+
+
+####
+
+w = ?
+
+x = z % 26
+z = z / 26
+
+x = x != w - 8
+
+y = 25
+y *= x (0 or 1)
+y += 1
+z *= y          # Multiply by 1 or 26
+
+y = (w + 4)*x
+
+z = -y
+
+
+####
+
+w = 1
+
+x = z % 26
+z = z / 26
+
+z *= 26 if (x - 8 != w)
+
+y = (w + 4)*x
+
+z = -y
+
+
+####
+
+w = 1
+
+x = z % 26
+z = z / 26
+
+z *= 26 if (x - 8 != w)
+
+z = -(w + 4)*x
+

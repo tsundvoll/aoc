@@ -4,8 +4,8 @@ import time
 
 import numpy as np
 import pyperclip
+from tqdm import tqdm
 from utility import parse
-
 
 def first_task(input):
     count = 0
