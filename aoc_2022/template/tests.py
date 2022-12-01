@@ -5,11 +5,8 @@ from solution import first_task, second_task
 @pytest.mark.parametrize(
     "input, expected_output",
     [
-        (
-            """example_input""",
-            0
-        ),
-    ]
+        ("""example_input""", 0),
+    ],
 )
 def test_first_task(input, expected_output):
     ex = list(map(lambda l: l.strip(), input.splitlines()))
@@ -19,11 +16,8 @@ def test_first_task(input, expected_output):
 @pytest.mark.parametrize(
     "input, expected_output",
     [
-        (
-            """example_input""",
-            None
-        ),
-    ]
+        ("""example_input""", None),
+    ],
 )
 def test_second_task(input, expected_output):
     ex = list(map(lambda l: l.strip(), input.splitlines()))
