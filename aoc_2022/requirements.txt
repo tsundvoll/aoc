@@ -1,0 +1,6 @@
+numpy
+pyperclip
+pytest
+python-dotenv
+tqdm
+requests
