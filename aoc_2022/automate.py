@@ -108,9 +108,9 @@ def download_input(year, day):
         filename = os.path.join(day_directory, "input.txt")
         if os.path.isfile(filename):
             raise RuntimeError(f"File {filename} already exists")
-        result = session.get(url, cookies=headers)
+        response = session.get(url, cookies=headers)
         with open(filename, "w") as file:
-            file.write(result.text)
+            file.write(response.text)
         input_data = list(map(lambda line: line.strip(), open(filename, "r")))
         give_intel_on_input(input_data)
         print(f"Input for {year}-12-{day} downloaded")
