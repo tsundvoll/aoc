@@ -1,16 +1,15 @@
 import os
+import string
 import time
 
 import pyperclip
 
-lower_case = [chr(c) for c in range(ord("a"), ord("z") + 1)]
-lower_case_values = [v for v in range(1, 27)]
+D = {}
+for key, value in enumerate(string.ascii_lowercase):
+    D[value] = key + 1
 
-upper_case = [chr(c) for c in range(ord("A"), ord("Z") + 1)]
-upper_case_values = [v for v in range(27, 53)]
-
-D = {key: value for (key, value) in zip(lower_case, lower_case_values)}
-D.update({key: value for (key, value) in zip(upper_case, upper_case_values)})
+for key, value in enumerate(string.ascii_uppercase):
+    D[value] = key + 27
 
 
 def first_task(input_data):
