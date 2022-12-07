@@ -1,8 +1,10 @@
+black
+matplotlib
+networkx
 numpy
+opencv-python
 pyperclip
 pytest
 python-dotenv
-tqdm
 requests
-black
-opencv-python
+tqdm
