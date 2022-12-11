@@ -1,5 +1,5 @@
 import pytest
-from solution import first_task, second_task
+from solution_refactored import first_task, second_task
 
 
 @pytest.mark.parametrize(
