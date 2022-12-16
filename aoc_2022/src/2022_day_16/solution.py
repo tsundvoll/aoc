@@ -17,11 +17,16 @@ def first_task(input_data):
 
 def second_task(input_data):
     count = 0
+    points_to_check = []
     for i in range(len(input_data)):
         value = input_data[i]
         value = value.strip("Sensor at x=")
         sensor_x, rest, beacon_y = value.split(", y=")
         sensor_y, beacon_x = rest.split(": closest beacon is at x=")
+        sensor_x = int(sensor_x)
+        sensor_y = int(sensor_y)
+        beacon_x = int(beacon_x)
+        beacon_y = int(beacon_y)
         print(sensor_x, sensor_y, beacon_x, beacon_y)
 
         m = abs(beacon_x-sensor_x) + abs(beacon_y-sensor_y)
@@ -31,9 +36,53 @@ def second_task(input_data):
         top_point = (sensor_x, sensor_y - m)
         bottom_point = (sensor_x, sensor_y + m)
 
-        slope_top_left = top_point[0]
-        
-        pass
+        def add_line(start_x, start_y, end_x, end_y, incr_x, incr_y):
+            x = start_x
+            y = start_y
+            while True:
+                points_to_check.append((x, y))
+                x += incr_x
+                y += incr_y
+                if x*incr_x > end_x*incr_x or y*incr_y > end_y*incr_y:
+                    break
+
+        # Top left line
+        start_x = sensor_x - 1
+        start_y = sensor_y - m - 1
+        end_x = sensor_x - m - 1
+        end_y = sensor_y - 1
+        incr_x = -1
+        incr_y = 1
+        add_line(start_x, start_y, end_x, end_y, incr_x, incr_y)
+
+        # Top right line
+        start_x = sensor_x + 1
+        start_y = sensor_y - m - 1
+        end_x = sensor_x + m + 1
+        end_y = sensor_y - 1
+        incr_x = 1
+        incr_y = 1
+        add_line(start_x, start_y, end_x, end_y, incr_x, incr_y)
+
+        # Bottom right line
+        start_x = sensor_x + m + 1
+        start_y = sensor_y + 1
+        end_x = sensor_x + 1
+        end_y = sensor_y + m + 1
+        incr_x = -1
+        incr_y = 1
+        add_line(start_x, start_y, end_x, end_y, incr_x, incr_y)
+
+        # Bottom right line
+        start_x = sensor_x - 1
+        start_y = sensor_y + m + 1
+        end_x = sensor_x - m - 1
+        end_y = sensor_y + 1
+        incr_x = -1
+        incr_y = -1
+        add_line(start_x, start_y, end_x, end_y, incr_x, incr_y)
+
+    print(len(points_to_check))
     return None
 
 
