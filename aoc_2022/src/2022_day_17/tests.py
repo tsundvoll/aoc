@@ -14,14 +14,16 @@ def test_first_task(input, expected_output):
 
 
 @pytest.mark.parametrize(
-    "input, expected_output",
+    "n_rocks, expected_output",
     [
-        (""">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>""", 1514285714288),
+        (2022, 3161),
+        (5000, 7879),
+        (10000, 15755),
+        (20000, 31505),
     ],
 )
-def test_second_task(input, expected_output):
-    ex = list(map(lambda l: l.strip(), input.splitlines()))
-    assert second_task(ex) == expected_output
+def test_second_task(n_rocks, expected_output):
+    assert second_task(n_rocks) == expected_output
 
 
 if __name__ == "__main__":
