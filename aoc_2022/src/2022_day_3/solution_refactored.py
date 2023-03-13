@@ -5,11 +5,11 @@ import time
 import pyperclip
 
 D = {}
-for key, value in enumerate(string.ascii_lowercase):
-    D[value] = key + 1
+for idx, char in enumerate(string.ascii_lowercase):
+    D[char] = 1 + idx
 
-for key, value in enumerate(string.ascii_uppercase):
-    D[value] = key + 27
+for idx, char in enumerate(string.ascii_uppercase):
+    D[char] = 27 + idx
 
 
 def first_task(input_data):
