@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 
 def first_task(input_data):
-    return 26
+    # return 26
     x_min = math.inf
     x_max = 0
     y_min = math.inf
