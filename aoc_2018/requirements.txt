@@ -1,0 +1,10 @@
+black
+matplotlib
+networkx
+numpy
+opencv-python
+pyperclip
+pytest
+python-dotenv
+requests
+tqdm
